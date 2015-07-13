@@ -1,0 +1,4 @@
+!noci
+data/System/GroupUpdatePlugin.txt 0644
+lib/Foswiki/Plugins/GroupUpdatePlugin.pm 0644
+lib/Foswiki/Plugins/GroupUpdatePlugin/Config.spec 0644

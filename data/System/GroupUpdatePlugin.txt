@@ -1,0 +1,49 @@
+%META:TOPICPARENT{name="Plugins"}%
+---+ !GroupUpdatePlugin
+
+%SHORTDESCRIPTION%
+
+To update groups based on %WIKITOOLNAME% content, the plugin jumps in after
+each topic save, processes its group update rules, and updates groups
+according to it.
+
+As an administrator, you can define rules by creating a topic with special
+contents, and pointing to it in the %WIKITOOLNAME% configuration (via
+=/bin/configure= or in the =lib/LocalSite.cfg= file). Here's an example of
+what the topic should contain:
+
+<verbatim>
+| *Group* | *Condition* | *Members* |
+| MyFancyAllUsersGroup | | %SOLRSEARCH{web="%USERSWEB%" "form:*UserForm" format="$topic" separator="," rows="12345"}% |
+| DocumentResponsibleGroup | | %SOLRSEARCH{web="Documents" "type:topic" facets="field_Responsible_s" separator_field_Responsible_s=", " format_field_Responsible_s="$key"}% |
+</verbatim>
+
+In this example, assuming !SolrPlugin is available, !MyFancyAllUsersGroup will
+contain all users known to %WIKITOOLNAME, and !DocumentResponsibleGroup will
+contain all values given in the "Responsible" form field in any topic in the
+Documents web.
+
+A cell in the =Condition= column, if empty, has no effect. Otherwise, macros
+in it are expanded and if the result is a true value (e.g. =yes=, =on=,
+=true=), the rule will be applied; otherwise it will be ignored.
+
+<!--
+One line description, required for extensions repository catalog.
+   * Set SHORTDESCRIPTION = %$SHORTDESCRIPTION%
+-->
+
+---++ Installation
+%$INSTALL_INSTRUCTIONS%
+
+---++ Plugin Info
+
+|  Author: | Foswiki:Main.JanKrueger  |
+|  Copyright: | &copy; 2015, Foswiki Contributors |
+|  License: | GPL ([[http://www.gnu.org/copyleft/gpl.html][GNU General Public License]]) |
+|  Release: | %$RELEASE% |
+|  Version: | %$VERSION% |
+|  Change&nbsp;History: | <!-- versions below in reverse order -->&nbsp; |
+|  07 Jul 2015 (1.0) | First version |
+|  Home: | http://foswiki.org/Extensions/%TOPIC% |
+|  Support: | http://foswiki.org/Support/%TOPIC% |
+
