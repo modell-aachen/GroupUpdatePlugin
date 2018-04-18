@@ -72,6 +72,12 @@ sub afterSaveHandler {
         $gmeta->putKeyed('PREFERENCE', {name => 'GROUP', value => $members});
         $gmeta->saveAs($gmeta->web, $gmeta->topic);
     }
+    # We need to refresh the UnifiedAuth provider, to update the ua database 
+    require Foswiki::UnifiedAuth;
+    my $ua =  Foswiki::UnifiedAuth->new;
+    my $provider = $ua->authProvider($Foswiki::Plugins::SESSION, '__uauth');
+    $provider->refresh() if $provider;
+
     return $text;
 }
 
